@@ -5,14 +5,16 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Pizza } from '../state';
+import Rating from '@mui/material/Rating';
+import { Pizza, State } from '../state';
+
 
 export default function MediaCard({ pizza }: any) {
   console.log("MediaCard prop recieved:");
   console.log(pizza);
 
   return (
-    <Card sx={{ minWidth: 300, maxWidth: 600 }}>
+    <Card sx={{ width: 250 }}>
       <CardMedia
         component="img"
         height="140"
@@ -27,6 +29,14 @@ export default function MediaCard({ pizza }: any) {
           {pizza?.description}
         </Typography>
       </CardContent>
+      <Rating
+        precision={0.5}
+        readOnly
+        value={pizza?.rating}
+        name="size-small"
+        defaultValue={2}
+        size="small"
+        />
       <CardActions>
         <Button size="small">Share</Button>
         <Button size="small">Learn More</Button>

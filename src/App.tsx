@@ -7,6 +7,8 @@ import { bindActionCreators } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators, State, ActionType, Action, Pizza } from './state';
 import { fetcher } from './node/index';
+import Box from '@mui/material/Box';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -51,11 +53,16 @@ function App() {
       <div>
       <ResponsiveAppBar />
       </div>
-      <div style={{display: "flex", justifyContent: "space-around"}}>
+      <Box sx={{
+        display: "inline-flex",
+        justifyContent: "space-around",
+        flexWrap: "wrap",
+        alignContent: "space-between",
+        }}>
         {storeData.map(function (value, index) {
           return <MediaCard pizza={value} />
         })}
-      </div>
+      </Box>
     </div>
   );
 }
