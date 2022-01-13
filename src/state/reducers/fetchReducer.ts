@@ -15,6 +15,7 @@ export default function productReducer(state = initialState, action: any) {
                 error: null
             };
 
+        case ActionType.DISPLAY_ORDER:
         case ActionType.FETCH_PRODUCTS_SUCCESS:
             return {
                 ...state,

@@ -1,19 +1,18 @@
 import { Action, ActionType } from '../action-types';
-import { fetcher } from '../../node/fetcher';
 
-const initialState: any = null;
+const initialState: any = {
+    pizzas:{}
+};
 
 const pizzaInfoReducer = (state: any = initialState, action: Action) => {
-
-    console.log("inside pizzaInfoReducer");
-    console.log(action);
+    console.log("triggereing pizzaInfo with ", action.payload);
 
     switch (action.type) {
         case ActionType.INIT_STORE:
-            return { ...state, data: action.payload };
+            return { ...state, pizzas: action.payload };
 
         default:
-            return { ...state };
+            return state;
     }
 }
 

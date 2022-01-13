@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -6,12 +6,11 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
-import { Pizza, State } from '../state';
+import Customisation from './customisationView';
 
 
-export default function MediaCard({ pizza }: any) {
-  console.log("MediaCard prop recieved:");
-  console.log(pizza);
+export function MediaCard({ pizza }: any) {
+  const [openCustomistaion, setCustomisation] = useState(false);
 
   return (
     <Card sx={{ width: 250 }}>
@@ -38,9 +37,9 @@ export default function MediaCard({ pizza }: any) {
         size="small"
         />
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Customisation/>
       </CardActions>
+      
     </Card>
   );
 }

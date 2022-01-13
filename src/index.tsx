@@ -4,8 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import { store } from './state/index';
+import { store, actionCreators } from './state';
 
+//Dispatch the fetchPizzas() before our root component renders
+store.dispatch(actionCreators.fetchPizzas());
 
 ReactDOM.render(
   <React.StrictMode>
