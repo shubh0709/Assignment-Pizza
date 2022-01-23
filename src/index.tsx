@@ -5,15 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store, actionCreators } from './state';
+import { BrowserRouter} from "react-router-dom";
 
 //Dispatch the fetchPizzas() before our root component renders
 store.dispatch(actionCreators.fetchPizzas());
 
 ReactDOM.render(
   <React.StrictMode>
+    <BrowserRouter>
     <Provider store={store}>
       <App />
     </Provider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

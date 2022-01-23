@@ -11,7 +11,9 @@ import Customisation from './customisationView';
 
 export function MediaCard({ pizza }: any) {
   const [openCustomistaion, setCustomisation] = useState(false);
+  // console.log("inside card pizza prop",pizza);    
 
+  
   return (
     <Card sx={{ width: 250 }}>
       <CardMedia
@@ -37,7 +39,7 @@ export function MediaCard({ pizza }: any) {
         size="small"
         />
       <CardActions>
-        <Customisation/>
+        <Customisation selectedPizza = {pizza}/>
       </CardActions>
       
     </Card>

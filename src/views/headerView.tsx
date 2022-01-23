@@ -15,6 +15,9 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import {Filter} from './filterView';
+import ShoppingCart from './shoppingCartView';
+import {Link} from 'react-router-dom';
+
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -158,6 +161,9 @@ export const Header = () => {
                                 inputProps={{ 'aria-label': 'search' }}
                             />
                         </Search>
+                    </Box>
+                    <Box style={{ display: "flex-inline", marginRight: "10" }}>
+                        <Link to="/Checkout"><ShoppingCart/></Link>
                     </Box>
                     <Box style={{ display: "flex-inline", marginRight: "10" }}>
                         <Filter />

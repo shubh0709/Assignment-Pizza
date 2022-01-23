@@ -99,6 +99,13 @@ export const itemDisplayOrder = (data: any) => {
         };
  };
 
+export const AddItemsToCart = (data:any) => {
+    return {
+        type: ActionType.ADD_TO_CART,
+        payload: data,
+    }
+}
+
 
 /*asynchronous thunk action creator
   calls the api, then dispatches the synchronous action creator
