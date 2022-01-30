@@ -19,10 +19,10 @@ export function Home() {
               <Header />
             </div>     
             <Box sx={{
-              display: "inline-flex",
-              justifyContent: "space-around",
+              display: "flex",
               flexWrap: "wrap",
-              alignContent: "space-between",
+              justifyContent: "space-around",
+              margin: "1rem"
             }}>
               {storeData.map(function (value:any) {
                 return <MediaCard pizza={value} key={value?.id} />

@@ -106,6 +106,15 @@ export const AddItemsToCart = (data:any) => {
     }
 }
 
+export const addToCart = (data:any) => {
+    console.log("inside addToCart", data);
+    return {
+        type: ActionType.ADD_TO_CART,
+        payload: data,
+    }
+}
+
+
 
 /*asynchronous thunk action creator
   calls the api, then dispatches the synchronous action creator

@@ -8,8 +8,7 @@ import {Routes, Route} from 'react-router-dom';
 
 function App() {
   let loading = useSelector((state: any) => state?.processFetch?.loading);
-  let storeData = useSelector((state: any) => state?.processFetch?.items)?? [];
-
+  
   return (
     <div className="App">
       { loading 
