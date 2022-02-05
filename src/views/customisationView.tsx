@@ -2,8 +2,8 @@ import React, {useEffect, useReducer, useState} from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Button  from '@mui/material/Button';
-import Toppings from './toppingsView';
-import PizzaSize from './pizzaSizeView';
+import {Toppings} from './toppingsView';
+import {PizzaSize} from './pizzaSizeView';
 import {useSelector, useDispatch} from 'react-redux';
 import {actionCreators} from '../state';
 
@@ -20,7 +20,7 @@ const style = {
 };
 
 
-export default function Customisation({ selectedPizza }: any){
+export function Customisation({ selectedPizza }: any){
         const [open, setOpen] = React.useState(false);
         const dispatch = useDispatch();
         const {addToCart} = actionCreators;
@@ -39,18 +39,17 @@ export default function Customisation({ selectedPizza }: any){
         }
        // console.log("selectedPizza: ",selectedPizza);    
 
-       const pizzaSizeRequested: string[] = [];
-       const toppingsRequested: string[] = [];
+       let pizzaSizeRequested:string;
+       let toppingsRequested:string[] = [];
     
-       function AddThisTopping(value:string):any{
-           toppingsRequested.push(value);
-           console.log(toppingsRequested);
+       function AddThisTopping(storeIDs: Set<string>):any{
+        toppingsRequested = Array.from(storeIDs);
+        console.log("selected toppings are: ",toppingsRequested);
        }
 
        function selectedSize(value:string):any{
         console.log("selecetedSize Name: ", value);
-        pizzaSizeRequested.push(value);
-
+        pizzaSizeRequested = value;
        }
 
        // mistake found -- inside useEffect "return" hooks dont
@@ -77,8 +76,9 @@ export default function Customisation({ selectedPizza }: any){
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx = {style}>
-                        <Button onClick={() =>  setQuantity( (quantity) => quantity+1)}> Inc Quantity </Button>
-                        <Button onClick={() =>  setQuantity( (quantity) => quantity-1)}> Dec Quantity </Button>
+                        <Button onClick={() =>  setQuantity( (quantity) => quantity+1)} style = {{border: '1px solid blue', padding: '5px'}}> + </Button>
+                        <span style = {{border: '1px solid blue', padding: '5px'}}>Quantity </span>
+                        <Button onClick={() =>  setQuantity( (quantity) => quantity-1)} style = {{border: '1px solid blue'}}> - </Button>
                         <Toppings pizzaToppingsProp = {selectedPizza?.toppings}  AddThisTopping = {(val:any) => AddThisTopping(val)} />
                         <PizzaSize pizzaSizeProp = {selectedPizza?.size}  selectedSize = {(val:any) => selectedSize(val)} />
                     </Box>

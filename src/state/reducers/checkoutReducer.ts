@@ -2,7 +2,7 @@ import { ActionType } from '../action-types';
 
 const initialState = {
         pizzaName: "",
-        pizzaSize: [],
+        pizzaSize: "",
         pizzaToppings: []
 };
 

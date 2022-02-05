@@ -6,7 +6,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
-import Customisation from './customisationView';
+import Box from '@mui/material/Box';
+import {Customisation} from './customisationView';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -16,7 +17,6 @@ const theme = createTheme({
       defaultProps: {
         // The default props to change
         display: "block",
-        marginBottom: "10px"
       },
     },
   },
@@ -40,10 +40,10 @@ export function MediaCard({ pizza }: any) {
       />
       <CardContent sx={{ flexGrow:1}}>
         <Typography  align="center" lineHeight="1.3"  variant="subtitle2" component="div">
-          {pizza?.name}
+          <Box style={{marginBottom:'10px'}}>{pizza?.name} </Box>
         </Typography>
-        <Typography  align="center" lineHeight="1" variant="caption" color="text.secondary">
-          {pizza?.description}
+        <Typography   align="center" lineHeight="1" variant="caption" color="text.secondary">
+          <Box style={{marginBottom:'10px'}}>{pizza?.description} </Box>
         </Typography>
       </CardContent>
       <Rating
