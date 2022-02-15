@@ -24,6 +24,8 @@ const theme = createTheme({
 
 export function MediaCard({ pizza }: any) {
   
+  const [openCustomisation, updateCustomisation ] = useState(false);
+
   return (
     <ThemeProvider theme={theme}>
     <Card sx={{ 
@@ -56,7 +58,8 @@ export function MediaCard({ pizza }: any) {
         sx= {{alignSelf: "center"}}
         />
       <CardActions>
-        <Customisation selectedPizza = {pizza}/>
+        <Button onClick={() => updateCustomisation(true)}>+Add-</Button>
+        { openCustomisation ? <Customisation selectedPizza = {pizza} updateCustomisation = {updateCustomisation}/> : null}
       </CardActions>      
     </Card>
     </ThemeProvider>

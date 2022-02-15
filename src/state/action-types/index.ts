@@ -11,6 +11,7 @@ export enum ActionType {
     ORDER_BY_NON_VEG = "ORDER_BY_NON_VEG",
     DISPLAY_ORDER= "DISPLAY_ORDER",
     ADD_TO_CART= "ADD_TO_CART",
+    DELETE_FROM_CART = "DELETE_FROM_CART",
 }
 
 interface PizzaSize {

@@ -1,12 +1,19 @@
 import { ActionType } from '../action-types';
 
-const initialState = {
-        pizzaName: "",
-        pizzaSize: "",
-        pizzaToppings: []
-};
+interface IOrdersDetails{
+    id: number,
+    pizzaName: string,
+    pizzaSize: "Regular"|"Medium"|"Large",
+    pizzaToppings: string[]
+}
 
-export default function checkoutReducer(state = initialState, action: any) {
+interface IOrders{
+    [x: string]: any;
+    [x:number]:IOrdersDetails,
+}
+
+
+export default function checkoutReducer(state:IOrders|null = null, action: any) {
     
     console.log("checkoutReducer", action.payload);
     
@@ -14,12 +21,14 @@ export default function checkoutReducer(state = initialState, action: any) {
         
     case ActionType.ADD_TO_CART:
         return {
-            ...state,
-            pizzaName: action.payload.pizzaName,
-            pizzaSize: action.payload.pizzaSize,
-            pizzaToppings: action.payload.pizzaToppings,
+            ...state, ...action.payload
         };
-
+    
+    // case ActionType.DELETE_FROM_CART:
+    //     return state.filter((val:IOrders) => {
+    //         console.log("val:", val);
+    //         return val.id === action.payload.id;
+    //     });
 
         default:
             return state;

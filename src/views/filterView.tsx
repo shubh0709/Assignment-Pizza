@@ -24,18 +24,10 @@ const style = {
 };
 
 const buttonStyles = {
-    "&.MuiButton-root": {
-        border: "2px black solid"
-    },
-    "&.MuiButton-text": {
-        color: "red"
-    },
-    "&.MuiButton-contained": {
-        color: "black"
-    },
-    "&.MuiButton-outlined": {
-        color: "brown"
-    }
+    backgroundColor: "white",
+    margin: "1rem",
+    color: "grey",
+    fontWeight: "bold",
 };
 
 export function Filter() {

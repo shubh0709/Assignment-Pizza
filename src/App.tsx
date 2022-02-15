@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import Loader from './views/loader';
 import {Routes, Route} from 'react-router-dom';
+import Reactotron from 'reactotron-react-js'
 
 function App() {
   let loading = useSelector((state: any) => state?.processFetch?.loading);
-  
+  Reactotron.log!('hello rendering world');
+
   return (
     <div className="App">
       { loading 

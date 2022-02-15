@@ -19,27 +19,43 @@ const style = {
     p: 4,
 };
 
+interface PropsRecieved {
+    selectedPizza : any, 
+    updateCustomisation:any
+}
 
-export function Customisation({ selectedPizza }: any){
-        const [open, setOpen] = React.useState(false);
+
+
+export function Customisation(props: PropsRecieved){
+        const [open, setOpen] = React.useState(true);
+        const customerOrderedTillNow = useSelector( (state:any) => state?.checkout || []);
         const dispatch = useDispatch();
         const {addToCart} = actionCreators;
-        const [quantity, setQuantity] = useState(0);
+        const currentQuantity = Object.keys(customerOrderedTillNow).length + 1;
+        console.log("customerOrderedTillNow ", customerOrderedTillNow);
         const handleOpen = () => { 
             return setOpen(true)
         };
         const handleClose = () => {
             console.log("handle close");
-            dispatch(addToCart({
-                pizzaName: selectedPizza?.name,
-                pizzaSize: pizzaSizeRequested,
-                pizzaToppings: toppingsRequested
+            console.log("currentQuantity ", currentQuantity);
+            dispatch(addToCart(
+            {
+                [currentQuantity] : {
+                    id: currentQuantity,
+                    pizzaName: props.selectedPizza?.name,
+                    pizzaSize: pizzaSizeRequested,
+                    pizzaToppings: toppingsRequested
+                }
             }));
+            
+            props.updateCustomisation(false);
             setOpen(false);
         }
-       // console.log("selectedPizza: ",selectedPizza);    
+       // console.log("props.selectedPizza: ",props.selectedPizza);    
 
-       let pizzaSizeRequested:string;
+       // setting default value
+       let pizzaSizeRequested:string = "Regular";
        let toppingsRequested:string[] = [];
     
        function AddThisTopping(storeIDs: Set<string>):any{
@@ -68,7 +84,6 @@ export function Customisation({ selectedPizza }: any){
 
         return (
             <div>
-                <Button onClick={handleOpen}>+Add-</Button>
                 <Modal
                     open={open}
                     onClose={handleClose}
@@ -76,11 +91,11 @@ export function Customisation({ selectedPizza }: any){
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx = {style}>
-                        <Button onClick={() =>  setQuantity( (quantity) => quantity+1)} style = {{border: '1px solid blue', padding: '5px'}}> + </Button>
+                        <Button style = {{border: '1px solid blue', padding: '5px'}}> + </Button>
                         <span style = {{border: '1px solid blue', padding: '5px'}}>Quantity </span>
-                        <Button onClick={() =>  setQuantity( (quantity) => quantity-1)} style = {{border: '1px solid blue'}}> - </Button>
-                        <Toppings pizzaToppingsProp = {selectedPizza?.toppings}  AddThisTopping = {(val:any) => AddThisTopping(val)} />
-                        <PizzaSize pizzaSizeProp = {selectedPizza?.size}  selectedSize = {(val:any) => selectedSize(val)} />
+                        <Button style = {{border: '1px solid blue'}}> - </Button>
+                        <Toppings pizzaToppingsProp = {props.selectedPizza?.toppings}  AddThisTopping = {(val:any) => AddThisTopping(val)} />
+                        <PizzaSize pizzaSizeProp = {props.selectedPizza?.size}  selectedSize = {(val:any) => selectedSize(val)} />
                     </Box>
                 </Modal>
             </div>

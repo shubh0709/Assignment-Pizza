@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import {useState, useRef} from 'react';
+import {useState, useRef, useEffect} from 'react';
 import Paper from '@mui/material/Paper';
 
 interface PropsRecieved {
@@ -11,13 +11,19 @@ interface PropsRecieved {
 
 
 export function PizzaSize(prop : PropsRecieved ){
-    const [prevSelectedButtonId, updatePrevSelectedButtonId] = useState("");
+    const [prevSelectedButtonId, updatePrevSelectedButtonId] = useState("Regular");
     let backgroundColor = "white";
     const myStateRef = useRef(prevSelectedButtonId);
     const setMyState = (data:string) => {
     myStateRef.current = data;
     updatePrevSelectedButtonId(data);
   };
+
+  useEffect(() => {
+      //setting default
+      window.document.getElementById("Regular")!.style.backgroundColor = "lightblue";
+  }, []);
+
 
     function getTitle(title:string):string{
         const arr = title.split(" ");
@@ -41,7 +47,7 @@ export function PizzaSize(prop : PropsRecieved ){
         }
 
         const selectedButton = window.document.getElementById(ID)!;
-        selectedButton.style.backgroundColor = "blue"
+        selectedButton.style.backgroundColor = "lightblue";
         setMyState(ID); 
     }
     
