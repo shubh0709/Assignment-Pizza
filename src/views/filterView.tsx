@@ -9,7 +9,10 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import {ActionType} from '../state';
 import {TextField as MuiTextField} from '@mui/material';
-  
+import styled from 'styled-components';  
+// you can use mui styled also, it provides the hover and focus functionality
+// https://mui.com/guides/interoperability/
+import { StyledEngineProvider } from '@mui/material/styles';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -23,13 +26,21 @@ const style = {
     p: 4,
 };
 
-const buttonStyles = {
-    backgroundColor: "white",
-    margin: "1rem",
-    color: "grey",
-    fontWeight: "bold",
-};
+const StyledButton = styled(Button)`
+    background-color: white;
+    margin: 1rem;
+    color: grey;
+    font-weight: bold;
+    &:hover{
+        background-color: grey;
+        color: white;
+    };
+    &:focus{
+        background-color: grey;
+        color: white;
+    };`;
 
+//#2c2a2a
 export function Filter() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -37,17 +48,19 @@ export function Filter() {
 
     return (
         <div>
-            <Button sx={buttonStyles} onClick={handleOpen}>Filter</Button>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={style}>
-                    <AutoComplete />
-                </Box>
-            </Modal>
+            <StyledEngineProvider injectFirst>
+                <StyledButton onClick={handleOpen}>Filter</StyledButton>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={style}>
+                        <AutoComplete />
+                    </Box>
+                </Modal>
+            </StyledEngineProvider>
         </div>
     );
 }
@@ -84,7 +97,7 @@ function Reducer(state:any, action:any):any {
             console.log("on destroying filter component");
             console.log(valueRef.current);
             dispatch(filtersApplied(valueRef.current));
-            dispatch(arrangePizzas(valueRef.current, fullData));
+           // dispatch(arrangePizzas(valueRef.current, fullData));
         }
     }, []);
     

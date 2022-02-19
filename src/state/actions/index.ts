@@ -55,20 +55,22 @@ export const arrangePizzas = ((filterArray: any, products: any) => {
             case ActionType.ORDER_BY_PRICE_ASCENDING:
                 console.log("entered ORDER_BY_PRICE_ASCENDING");
                 products.sort((a:any,b:any) => {
-                    const result = (a.price>b.price)?true:false;
+                    const result = (a.price>=b.price)?1:-1;
                     console.log("a.price: " + a.price + " b.price: " + b.price + ", result: " + result);
                     return result;
                 });
+                console.log("products after sorting in ascending order ", products);
                 break;
                 
-            case ActionType.ORDER_BY_PRICE_DESCENDING:
-                console.log("entered ORDER_BY_PRICE_DESCENDING");
-                products.sort((a:any,b:any) => (a.price<b.price)?true:false);
-                break;
-                
-           case ActionType.ORDER_BY_VEG:
-                products = products.filter((val: any) => {
-                    return val.isVeg;
+                case ActionType.ORDER_BY_PRICE_DESCENDING:
+                    console.log("entered ORDER_BY_PRICE_DESCENDING");
+                    products.sort((a:any,b:any) => (a.price<b.price)?1:-1);
+                    console.log("descending products order ", products);
+                    break;
+                    
+                    case ActionType.ORDER_BY_VEG:
+                        products = products.filter((val: any) => {
+                            return val.isVeg;
                 });
                 break;
         
@@ -85,10 +87,7 @@ export const arrangePizzas = ((filterArray: any, products: any) => {
 
         console.log("products after filter: ", products);
 
-        return {
-              type: ActionType.DISPLAY_ORDER,
-              payload: {products}
-            };   
+        return products;
     
    });
    
