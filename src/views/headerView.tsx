@@ -27,20 +27,20 @@ import { matchSorter } from 'match-sorter';
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-// const Search = styled('div')(({ theme }) => ({
-//     position: 'relative', 
-//     borderRadius: theme.shape.borderRadius,
-//     backgroundColor: alpha(theme.palette.common.white, 0.15),
-//     '&:hover': {
-//         backgroundColor: alpha(theme.palette.common.white, 0.25),
-//     },
-//     marginLeft: 0,
-//     width: '100%',
-//     [theme.breakpoints.up('sm')]: {
-    //         marginLeft: theme.spacing(1),
-//         width: 'auto',
-//     },
-// }));
+const Search = styled('div')(({ theme }) => ({
+    position: 'relative', 
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    '&:hover': {
+        backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+            marginLeft: theme.spacing(1),
+        width: 'auto',
+    },
+}));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 2),
@@ -74,7 +74,7 @@ export const Header = () => {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
     const [selectedPizzafromSearchBar, pizzaToSearch] = useState("");
-    const [listOfPizzas, updateListOfPizzas] = useState([{}]);
+    const [listOfPizzas, updateListOfPizzas] = useState([""]);
     // let fuse: any;
     const filterOptions = (listOfPizzas:any, selectedPizzafromSearchBar:any ) => { 
         console.log("inside filterOptions selectedPizzafromSearchBar", selectedPizzafromSearchBar);
@@ -82,14 +82,12 @@ export const Header = () => {
 
         return matchSorter(listOfPizzas, selectedPizzafromSearchBar)};
     
-    const EEEffect = () => {
+     useEffect(() => {
        updateListOfPizzas(() =>  storeData.map(function (pizza:any) {
             return pizza?.name;
           }));
-
         console.log("updated list of Pizzas: ", listOfPizzas);
-        return listOfPizzas;
-    };
+    }, [storeData]);
 
     // function searchPizzasByName(value:any){
     //     const searchQuery = value;
@@ -184,12 +182,15 @@ export const Header = () => {
                     </Box>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         <Autocomplete
-                            filterOptions={filterOptions}
-                            sx={{ width: 500}}
-                            options={EEEffect()}
-                            onKeyDown={(event:any) => {pizzaToSearch(() => event.target.value)}}
+                            style={{
+                                position: 'relative', 
+                                marginLeft: 0,
+                                width: 200
+                            }}
+                            options={storeData}
+                            getOptionLabel={(option:any) => `${option.name}`}
                             renderInput={(params) => (
-                            <TextField {...params} label="Search input" placeholder="search" />
+                            <TextField {...params} label="Search" placeholder="Search" />
                             )}
                         />
 
